@@ -15,7 +15,7 @@
 
 
 
-void readMatrix (int ** ptr, int size);
+void readMatrix (double ** ptr, int size);
 
 
 #endif //READMATRIX_HPP

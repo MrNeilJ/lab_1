@@ -17,7 +17,7 @@
 
 #include <string>
 
-double determinant(int **, int);
+double determinant(double **, int);
 
 
 #endif //DETERMINANT_HPP

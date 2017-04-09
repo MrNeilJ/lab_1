@@ -1,15 +1,14 @@
 output: main.o readMatrix.o determinant.o
-    g++ main.o readMatrix.o determinant.o -o output
-
+	g++ main.o readMatrix.o determinant.o -o output
 
 main.o: main.cpp
-    g++ -c main.cpp
+	g++ -c main.cpp
 
 readMatrix.o: readMatrix.cpp readMatrix.hpp
-    g++ -c readMatrix.cpp
+	g++ -c readMatrix.cpp
 
 determinant.o: determinant.cpp determinant.hpp
-    g++ -c determinant.cpp
+	g++ -c determinant.cpp
 
 clean:
-    rm *.o output
+	rm *.o output

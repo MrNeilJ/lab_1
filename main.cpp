@@ -14,41 +14,58 @@
 #include "readMatrix.hpp"
 #include "determinant.hpp"
 #include <iostream>
+#include <limits>
 
 int main() {
     // Welcome the user to the application
     std::cout << "Welcome to the Matrix! Matrix Maker that is..." << std::endl;
-    std::cout << "Tell me...how big do you want your matrix? (2 for 2x2 & 3 for 3x3)" << std::endl;
+    std::cout << "\nTell me...how big do you want your matrix? (2 for 2x2 & 3 for 3x3): ";
 
     // Define Variables used for size and pointer to a variable.
     int matrixSize;
-    int** matrixPtr = NULL;
+    double** matrixPtr = NULL;
+	int count = 0;
 
     // Take input from the customer and ensure that the value inputted is a 2 or a 3
     do {
         std::cin >> matrixSize;
         // Check to see what the user inputted is a valid response
-        if (matrixSize == 2 || matrixSize == 3)
+
+		if (matrixSize == 2 || matrixSize == 3)
         {
-            matrixPtr = new int*[matrixSize];
+            matrixPtr = new double*[matrixSize];
             for (int i = 0; i < matrixSize; i++)
             {
-                matrixPtr[i] = new int[matrixSize];
+                matrixPtr[i] = new double[matrixSize];
             }
         }
+		else if (count >= 4)
+		{
+			std::cout << "Seems like you don't understand.  Re-run the program when you're ready. Now quitting."
+					  << std::endl;
+			return 0;
+		}
         // If it isn't, then tell the user and loop again.
         else
         {
+			// Clear the error for the cin stream
+			std::cin.clear();
+
+			// Remove whatever is stored in the buffer up to the newline symbol at the end of the input buffer
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::cout << "It appears you did not choose a 2 or a 3, try again!" << std::endl;
+			count++;
         }
+		std::cin.clear();
     } while (matrixSize != 2 && matrixSize != 3);
 
-    readMatrix(matrixPtr, (matrixSize));
+	// Call the readMatrix function to get further input from the user
+    readMatrix(matrixPtr, matrixSize);
 
     std::cout << "Below is your printed Matrix: " << std::endl;
 
     // Loop through first portion of the Matrix Array
-    for (int i = 0; i < (matrixSize); i++)
+    for (int i = 0; i < matrixSize; i++)
     {
         // Loop through the second portion of the Matrix Array
         for (int j = 0; j < matrixSize; j++) {
@@ -60,7 +77,7 @@ int main() {
     }
 
     // Define a variable and run the determinant function
-    int determinantValue = determinant(matrixPtr, (matrixSize));
+    double determinantValue = determinant(matrixPtr, matrixSize);
 
     std::cout << "\nDeterminant: " << determinantValue << std::endl;
 

@@ -14,7 +14,7 @@
 
 #include "determinant.hpp"
 
-double determinant (int** ptr, int size)
+double determinant (double** ptr, int size)
 {
 // Isolate which formula will be required
     if (size == 2)
